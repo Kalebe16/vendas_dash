@@ -1,8 +1,12 @@
-from app import Dash, html, dcc, Input, Output
+from dash import Dash, html, dcc, Input, Output
 import plotly.express as px
 import pandas as pd
 
-app = Dash(__name__)
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+app = Dash(__name__, external_stylesheets=external_stylesheets)
+
+server = app.server
 # SEMPRE FAZER ESSE PROCESSO QUANDO CRIAR UM PROJETO COM DASH
 
 # assume you have a "long-form" data frame
@@ -55,4 +59,4 @@ def update_output(value):
 
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True)
