@@ -1,1 +1,1 @@
-web: dash.py
+web: gunicorn dash:app
