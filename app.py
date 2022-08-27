@@ -6,6 +6,8 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 
+
+
 server = app.server
 # SEMPRE FAZER ESSE PROCESSO QUANDO CRIAR UM PROJETO COM DASH
 
@@ -22,22 +24,32 @@ opcoes = list(df['ID Loja'].unique()) # criou uma lista com os itens da coluna I
 opcoes.append("Todas as Lojas")
 
 app.layout = html.Div(children=[
+    
     html.H1(children='Vendas das lojas'),
+    html.Button("Baixar base de dados", id="btn_xlsx"),
+    dcc.Download(id="download-dataframe-xlsx"),
+    
     html.H2(children='Gráfico com o numero de vendas de Todos os Produtos separados por loja'),
-
+    
 
     html.Div(children='''
         Obs: Esse gráfico mostra a quantidade de produtos vendidos, não o faturamento.
     '''),
 
+    
+
 
     dcc.Dropdown(opcoes, value='Todas as Lojas', id='lista_lojas'),
                 # OPCOES     |  VALOR INICIAL    |  NOME DO BOTÃO
+
+
+    
 
     dcc.Graph(
         id='grafico_quantidade_vendas',
         figure=fig
     )
+    
 ])
 
 
@@ -55,6 +67,16 @@ def update_output(value):
 
         
     return fig
+
+@app.callback(
+    Output("download-dataframe-xlsx", "data"),
+    Input("btn_xlsx", "n_clicks"),
+    prevent_initial_call=True,
+)
+def func(n_clicks):
+    return dcc.send_file(
+        "Vendas.xlsx"
+    )
 
 
 
