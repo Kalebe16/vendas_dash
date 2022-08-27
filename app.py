@@ -23,7 +23,7 @@ opcoes.append("Todas as Lojas")
 
 app.layout = html.Div(children=[
     html.H1(children='Vendas das lojas'),
-    html.H2(children='Gráfico com o o numero de vendas de Todos os Produtos separados por loja'),
+    html.H2(children='Gráfico com o numero de vendas de Todos os Produtos separados por loja'),
 
 
     html.Div(children='''
